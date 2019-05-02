@@ -27,100 +27,145 @@ tmp_frame3.grid()
 str1 = StringVar()
 str1.set("Just Like Music")
 Date1 = StringVar()
-Time1 = StringVar ()
+Time1 = StringVar()
 
 Date1.set(time.strftime("%d/%m/%Y"))
 Time1.set(time.strftime("%H/%M/%S"))
+
+def setblackkey(item):
+    item.config(bg="black",fg="white")
+
+def setwhitekey(item):
+    item.config(bg="Gainsboro", fg="black")
 
 def value_Cs():
     str1.set("C#")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/C_s.wav")
     sound.play()
+    btnCs.config(bg="Tan", fg="black")
+    root.after(100,setblackkey,btnCs)
 
 def value_Ds():
     str1.set("D#")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/D_s.wav")
     sound.play()
+    btnDs.config(bg="Tan", fg="black")
+    root.after(100, setblackkey, btnDs)
 
 def value_Fs():
     str1.set("F#")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/F_s.wav")
     sound.play()
+    btnFs.config(bg="Tan", fg="black")
+    root.after(100, setblackkey, btnFs)
 
 def value_Gs():
     str1.set("G#")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/G_s.wav")
     sound.play()
+    btnGs.config(bg="Tan", fg="black")
+    root.after(100, setblackkey, btnGs)
 
 def value_Bb():
     str1.set("Bb")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/Bb.wav")
     sound.play()
+    btnBb.config(bg="Tan", fg="black")
+    root.after(100, setblackkey, btnBb)
 
 def value_Cs1():
     str1.set("C_s1")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/C_s1.wav")
     sound.play()
+    btnCs1.config(bg="Tan", fg="black")
+    root.after(100, setblackkey, btnCs1)
 
 def value_Ds1():
     str1.set("D_s1")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/D_s1.wav")
     sound.play()
+    btnDs1.config(bg="Tan", fg="black")
+    root.after(100, setblackkey, btnDs1)
 
 def value_C():
     str1.set("C")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/C.wav")
     sound.play()
+    btnC.config(bg="DimGray", fg="white")
+    root.after(100, setwhitekey, btnC)
 
 def value_D():
     str1.set("D")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/D.wav")
     sound.play()
+    btnD.config(bg="DimGray", fg="white")
+    root.after(100, setwhitekey, btnD)
 
 def value_E():
     str1.set("E")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/E.wav")
     sound.play()
+    btnE.config(bg="DimGray", fg="white")
+    root.after(100, setwhitekey, btnE)
 
 def value_F():
     str1.set("F")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/F.wav")
     sound.play()
+    btnF.config(bg="DimGray", fg="white")
+    root.after(100, setwhitekey, btnF)
 
 def value_G():
     str1.set("G")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/G.wav")
     sound.play()
+    btnG.config(bg="DimGray", fg="white")
+    root.after(100, setwhitekey, btnG)
 
 def value_A():
     str1.set("A")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/A.wav")
     sound.play()
+    btnA.config(bg="DimGray", fg="white")
+    root.after(100, setwhitekey, btnA)
 
 def value_B():
     str1.set("B")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/B.wav")
     sound.play()
+    btnB.config(bg="DimGray", fg="white")
+    root.after(100, setwhitekey, btnB)
 
 def value_C1():
     str1.set("C1")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/C1.wav")
     sound.play()
+    btnC1.config(bg="DimGray", fg="white")
+    root.after(100, setwhitekey, btnC1)
 
 def value_D1():
     str1.set("D1")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/D1.wav")
     sound.play()
+    btnD1.config(bg="DimGray", fg="white")
+    root.after(100, setwhitekey, btnD1)
 
 def value_E1():
     str1.set("E1")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/E1.wav")
     sound.play()
+    btnE1.config(bg="DimGray", fg="white")
+    root.after(100, setwhitekey, btnE1)
 
 def value_F1():
     str1.set("F1")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/F1.wav")
     sound.play()
+    btnF1.config(bg="DimGray", fg="white")
+    root.after(100, setwhitekey, btnF1)
+
+
+
 
 # ==========Lable with Title========= #
 
