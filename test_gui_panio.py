@@ -6,6 +6,8 @@ import tkinter as Tk
 # pygame.init()
 pygame.mixer.init(44100, -16,2,2048)
 
+pitch_list = []
+
 root = Tk.Tk()
 root.title("Panio GUI")
 # width,height = 1000,500
@@ -91,6 +93,7 @@ def value_C():
     str1.set("C")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/C.wav")
     sound.play()
+    pitch_list.append(60)
     btnC.config(bg="DimGray", fg="white")
     root.after(100, setwhitekey, btnC)
 
@@ -119,8 +122,10 @@ def value_G():
     str1.set("G")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/G.wav")
     sound.play()
+    pitch_list.append(67)
     btnG.config(bg="DimGray", fg="white")
     root.after(100, setwhitekey, btnG)
+    print(pitch_list)
 
 def value_A():
     str1.set("A")
