@@ -185,112 +185,132 @@ txtDisplay = Entry(tmp_frame1, textvariable = str1,font = ("arial",18,"bold"), b
 txtTime = Entry(tmp_frame1, textvariable = Time1,font = ("arial",18,"bold"), bg = "white").grid(row = 1, column = 2,pady = 1)
 
 #=================================== black key
-btnCs = Tk.Label(tmp_frame2,height = 6, width = 6,text = "C#",font = ("arial",18,"bold"), bg = "black",fg = "white")
-btnCs.grid(row = 0, column = 0, padx = 5, pady = 5)
+space = Tk.Label(tmp_frame2,height = 6, width = 4,text = "",font = ("arial",18,"bold"), bg = "white",fg = "white")
+space.grid(row = 0, column = 0, padx = 5, pady = 5)
+
+btnCs = Tk.Label(tmp_frame2,height = 6, width = 8,text = "C#",font = ("arial",18,"bold"), bg = "black",fg = "white")
+btnCs.grid(row = 0, column = 1, padx = 5, pady = 5)
 btnCs.bind("<Button-1>",lambda event:value_Cs())
 root.bind("<e>", lambda event: value_Cs())
 
 
-btnDs = Tk.Label(tmp_frame2,height = 6, width = 6,text = "D#", bg = "black",fg = "white",font = ("arial",18,"bold"))
-btnDs.grid(row = 0, column = 1, padx = 5, pady = 5)
+btnDs = Tk.Label(tmp_frame2,height = 6, width = 8,text = "D#", bg = "black",fg = "white",font = ("arial",18,"bold"))
+btnDs.grid(row = 0, column = 2, padx = 5, pady = 5)
 btnDs.bind("<Button-1>",lambda event:value_Ds())
 root.bind("<r>", lambda event: value_Ds())
 
+space = Tk.Label(tmp_frame2,height = 6, width = 4,text = "",font = ("arial",18,"bold"), bg = "white",fg = "white")
+space.grid(row = 0, column = 3, padx = 5, pady = 5)
 
-btnFs = Tk.Label(tmp_frame2,height = 6, width = 6, text="F#", bg = "black",fg="white", font = ("arial",18,"bold"))
-btnFs.grid(row = 0, column = 2, padx = 5, pady = 5)
+space = Tk.Label(tmp_frame2,height = 6, width = 4,text = "",font = ("arial",18,"bold"), bg = "white",fg = "white")
+space.grid(row = 0, column = 4, padx = 5, pady = 5)
+
+btnFs = Tk.Label(tmp_frame2,height = 6, width = 8, text="F#", bg = "black",fg="white", font = ("arial",18,"bold"))
+btnFs.grid(row = 0, column = 5, padx = 5, pady = 5)
 btnFs.bind("<Button-1>",lambda event:value_Fs())
 root.bind("<t>", lambda event: value_Fs())
 
 
-btnGs = Tk.Label(tmp_frame2,height = 6, width = 6,text = "G#",font = ("arial",18,"bold"), bg = "black",fg = "white")
-btnGs.grid(row = 0, column = 3, padx = 5, pady = 5)
+btnGs = Tk.Label(tmp_frame2,height = 6, width = 8,text = "G#",font = ("arial",18,"bold"), bg = "black",fg = "white")
+btnGs.grid(row = 0, column = 6, padx = 5, pady = 5)
 btnGs.bind("<Button-1>",lambda event:value_Gs())
 root.bind("<y>", lambda event: value_Gs())
 
 
-btnBb = Tk.Label(tmp_frame2,height = 6, width = 6,bd = 4,text = "Bb",font = ("arial",18,"bold"), bg = "black",fg = "white")
-btnBb.grid(row = 0, column = 4, padx = 5, pady = 5)
+btnBb = Tk.Label(tmp_frame2,height = 6, width = 8,text = "Bb",font = ("arial",18,"bold"), bg = "black",fg = "white")
+btnBb.grid(row = 0, column = 7, padx = 5, pady = 5)
 btnBb.bind("<Button-1>",lambda event:value_Bb())
 root.bind("<u>", lambda event: value_Bb())
 
+space = Tk.Label(tmp_frame2,height = 6, width = 4,text = "",font = ("arial",18,"bold"), bg = "white",fg = "white")
+space.grid(row = 0, column = 8, padx = 5, pady = 5)
 
-btnCs1 = Tk.Label(tmp_frame2,height = 6, width = 6,bd = 4,text = "C#1",font = ("arial",18,"bold"), bg = "black",fg = "white")
-btnCs1.grid(row = 0, column = 5, padx = 5, pady = 5)
+space = Tk.Label(tmp_frame2,height = 6, width = 4,text = "",font = ("arial",18,"bold"), bg = "white",fg = "white")
+space.grid(row = 0, column = 9, padx = 5, pady = 5)
+
+btnCs1 = Tk.Label(tmp_frame2,height = 6, width = 8,text = "C#1",font = ("arial",18,"bold"), bg = "black",fg = "white")
+btnCs1.grid(row = 0, column = 10, padx = 5, pady = 5)
 btnCs1.bind("<Button-1>",lambda event:value_Cs1())
 root.bind("<i>", lambda event: value_Cs1())
 
 
-btnDs1 = Tk.Label(tmp_frame2,height = 6, width = 6,bd = 4,text = "D#1",font = ("arial",18,"bold"), bg = "black",fg = "white")
-btnDs1.grid(row = 0, column = 6, padx = 5, pady = 5)
+btnDs1 = Tk.Label(tmp_frame2,height = 6, width = 8,text = "D#1",font = ("arial",18,"bold"), bg = "black",fg = "white")
+btnDs1.grid(row = 0, column = 11, padx = 5, pady = 5)
 btnDs1.bind("<Button-1>",lambda event:value_Ds1())
 root.bind("<o>", lambda event: value_Ds1())
 
+space = Tk.Label(tmp_frame2,height = 6, width = 4,text = "",font = ("arial",18,"bold"), bg = "white",fg = "white")
+space.grid(row = 0, column = 12, padx = 5, pady = 5)
 
+space = Tk.Label(tmp_frame2,height = 6, width = 4,text = "",font = ("arial",18,"bold"), bg = "white",fg = "white")
+space.grid(row = 0, column = 13, padx = 5, pady = 5)
+
+space = Tk.Label(tmp_frame2,height = 6, width = 4,text = "",font = ("arial",18,"bold"), bg = "white",fg = "white")
+space.grid(row = 0, column = 14, padx = 5, pady = 5)
 
 # =================================== white key
 btnC = Tk.Label(tmp_frame3,height = 6, width = 8,bd = 4,text = "C",font = ("arial",18,"bold"), bg = "Gainsboro",fg = "black")
-btnC.grid(row = 0, column = 0, padx = 5, pady = 5)
+btnC.grid(row = 1, column = 0, padx = 5, pady = 5)
 btnC.bind("<Button-1>",lambda event:value_C())
 root.bind("<a>", lambda event: value_C())
 
 
 btnD = Tk.Label(tmp_frame3,height = 6, width = 8,bd = 4,text = "D",font = ("arial",18,"bold"), bg = "Gainsboro",fg = "black")
-btnD.grid(row = 0, column = 1, padx = 5, pady = 5)
+btnD.grid(row = 1, column = 1, padx = 5, pady = 5)
 btnD.bind("<Button-1>",lambda event:value_D())
 root.bind("<s>", lambda event: value_D())
 
 
 btnE = Tk.Label(tmp_frame3,height = 6, width = 8,bd = 4,text = "E",font = ("arial",18,"bold"), bg = "Gainsboro",fg = "black")
-btnE.grid(row = 0, column = 2, padx = 5, pady = 5)
+btnE.grid(row = 1, column = 2, padx = 5, pady = 5)
 btnE.bind("<Button-1>",lambda event:value_E())
 root.bind("<d>", lambda event: value_E())
 
 
 btnF = Tk.Label(tmp_frame3,height = 6, width = 8,bd = 4,text = "F",font = ("arial",18,"bold"), bg = "Gainsboro",fg = "black")
-btnF.grid(row = 0, column = 3, padx = 5, pady = 5)
+btnF.grid(row = 1, column = 3, padx = 5, pady = 5)
 btnF.bind("<Button-1>",lambda event:value_F())
 root.bind("<f>", lambda event: value_F())
 
 
 btnG = Tk.Label(tmp_frame3,height = 6, width = 8,bd = 4,text = "G",font = ("arial",18,"bold"), bg = "Gainsboro",fg = "black")
-btnG.grid(row = 0, column = 4, padx = 5, pady = 5)
+btnG.grid(row = 1, column = 4, padx = 5, pady = 5)
 btnG.bind("<Button-1>",lambda event:value_G())
 root.bind("<g>", lambda event: value_G())
 
 
 btnA = Tk.Label(tmp_frame3,height = 6, width = 8,bd = 4,text = "A",font = ("arial",18,"bold"), bg = "Gainsboro",fg = "black")
-btnA.grid(row = 0, column = 5, padx = 5, pady = 5)
+btnA.grid(row = 1, column = 5, padx = 5, pady = 5)
 btnA.bind("<Button-1>",lambda event:value_A())
 root.bind("<h>", lambda event: value_A())
 
 
 btnB = Tk.Label(tmp_frame3,height = 6, width = 8,bd = 4,text = "B",font = ("arial",18,"bold"), bg = "Gainsboro",fg = "black")
-btnB.grid(row = 0, column = 6, padx = 5, pady = 5)
+btnB.grid(row = 1, column = 6, padx = 5, pady = 5)
 btnB.bind("<Button-1>",lambda event:value_B())
 root.bind("<j>", lambda event: value_B())
 
 
 btnC1 = Tk.Label(tmp_frame3,height = 6, width = 8,bd = 4,text = "C1",font = ("arial",18,"bold"), bg = "Gainsboro",fg = "black")
-btnC1.grid(row = 0, column = 7, padx = 5, pady = 5)
+btnC1.grid(row = 1, column = 7, padx = 5, pady = 5)
 btnC1.bind("<Button-1>",lambda event:value_C1())
 root.bind("<k>", lambda event: value_C1())
 
 
 btnD1 = Tk.Label(tmp_frame3,height = 6, width = 8,bd = 4,text = "D1",font = ("arial",18,"bold"), bg = "Gainsboro",fg = "black")
-btnD1.grid(row = 0, column = 8, padx = 5, pady = 5)
+btnD1.grid(row = 1, column = 8, padx = 5, pady = 5)
 btnD1.bind("<Button-1>",lambda event:value_D1())
 root.bind("<l>", lambda event: value_D1())
 
 
 btnE1 = Tk.Label(tmp_frame3,height = 6, width = 8,bd = 4,text = "E1",font = ("arial",18,"bold"), bg = "Gainsboro",fg = "black")
-btnE1.grid(row = 0, column = 9, padx = 5, pady = 5)
+btnE1.grid(row = 1, column = 9, padx = 5, pady = 5)
 btnE1.bind("<Button-1>",lambda event:value_E1())
 root.bind("<;>", lambda event: value_E1())
 
 
 btnF1 = Tk.Label(tmp_frame3,height = 6, width = 8,bd = 4,text = "F1",font = ("arial",18,"bold"), bg = "Gainsboro",fg = "black")
-btnF1.grid(row = 0, column = 10, padx = 5, pady = 5)
+btnF1.grid(row = 1, column = 10, padx = 5, pady = 5)
 btnF1.bind("<Button-1>",lambda event:value_F1())
 root.bind("<'>", lambda event: value_F1())
 
