@@ -101,6 +101,7 @@ def value_D():
     str1.set("D")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/D.wav")
     sound.play()
+    pitch_list.append(62)
     btnD.config(bg="DimGray", fg="white")
     root.after(100, setwhitekey, btnD)
 
@@ -108,6 +109,7 @@ def value_E():
     str1.set("E")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/E.wav")
     sound.play()
+    pitch_list.append(64)
     btnE.config(bg="DimGray", fg="white")
     root.after(100, setwhitekey, btnE)
 
@@ -115,6 +117,7 @@ def value_F():
     str1.set("F")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/F.wav")
     sound.play()
+    pitch_list.append(65)
     btnF.config(bg="DimGray", fg="white")
     root.after(100, setwhitekey, btnF)
 
@@ -131,6 +134,7 @@ def value_A():
     str1.set("A")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/A.wav")
     sound.play()
+    pitch_list.append(69)
     btnA.config(bg="DimGray", fg="white")
     root.after(100, setwhitekey, btnA)
 
