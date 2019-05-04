@@ -44,6 +44,7 @@ def value_Cs():
     str1.set("C#")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/C_s.wav")
     sound.play()
+    pitch_list.append(61)
     btnCs.config(bg="Tan", fg="black")
     root.after(100,setblackkey,btnCs)
 
@@ -51,6 +52,7 @@ def value_Ds():
     str1.set("D#")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/D_s.wav")
     sound.play()
+    pitch_list.append(63)
     btnDs.config(bg="Tan", fg="black")
     root.after(100, setblackkey, btnDs)
 
@@ -58,6 +60,7 @@ def value_Fs():
     str1.set("F#")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/F_s.wav")
     sound.play()
+    pitch_list.append(66)
     btnFs.config(bg="Tan", fg="black")
     root.after(100, setblackkey, btnFs)
 
@@ -65,6 +68,7 @@ def value_Gs():
     str1.set("G#")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/G_s.wav")
     sound.play()
+    pitch_list.append(68)
     btnGs.config(bg="Tan", fg="black")
     root.after(100, setblackkey, btnGs)
 
@@ -72,6 +76,7 @@ def value_Bb():
     str1.set("Bb")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/Bb.wav")
     sound.play()
+    pitch_list.append(70)
     btnBb.config(bg="Tan", fg="black")
     root.after(100, setblackkey, btnBb)
 
@@ -79,6 +84,7 @@ def value_Cs1():
     str1.set("C_s1")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/C_s1.wav")
     sound.play()
+    pitch_list.append(73)
     btnCs1.config(bg="Tan", fg="black")
     root.after(100, setblackkey, btnCs1)
 
@@ -86,6 +92,7 @@ def value_Ds1():
     str1.set("D_s1")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/D_s1.wav")
     sound.play()
+    pitch_list.append(75)
     btnDs1.config(bg="Tan", fg="black")
     root.after(100, setblackkey, btnDs1)
 
@@ -142,6 +149,7 @@ def value_B():
     str1.set("B")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/B.wav")
     sound.play()
+    pitch_list.append(71)
     btnB.config(bg="DimGray", fg="white")
     root.after(100, setwhitekey, btnB)
 
@@ -149,6 +157,7 @@ def value_C1():
     str1.set("C1")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/C1.wav")
     sound.play()
+    pitch_list.append(72)
     btnC1.config(bg="DimGray", fg="white")
     root.after(100, setwhitekey, btnC1)
 
@@ -156,6 +165,7 @@ def value_D1():
     str1.set("D1")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/D1.wav")
     sound.play()
+    pitch_list.append(74)
     btnD1.config(bg="DimGray", fg="white")
     root.after(100, setwhitekey, btnD1)
 
@@ -163,6 +173,7 @@ def value_E1():
     str1.set("E1")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/E1.wav")
     sound.play()
+    pitch_list.append(76)
     btnE1.config(bg="DimGray", fg="white")
     root.after(100, setwhitekey, btnE1)
 
@@ -170,6 +181,7 @@ def value_F1():
     str1.set("F1")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/F1.wav")
     sound.play()
+    pitch_list.append(77)
     btnF1.config(bg="DimGray", fg="white")
     root.after(100, setwhitekey, btnF1)
 
