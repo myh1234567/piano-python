@@ -3,11 +3,12 @@ import time
 import datetime
 import pygame
 import tkinter as Tk
+import threading
+
 # pygame.init()
 pygame.mixer.init(44100, -16,2,2048)
 
 pitch_list = []
-
 root = Tk.Tk()
 root.title("Panio GUI")
 # width,height = 1000,500
@@ -187,7 +188,6 @@ def value_F1():
 
 
 
-
 # ==========Lable with Title========= #
 
 Label(tmp_frame1,text = "Piano Musical Keys",font = ("Impact",25,"bold"), bg = "white").grid(row = 0, column = 0, columnspan = 11)
@@ -330,7 +330,20 @@ btnF1.grid(row = 1, column = 10, padx = 5, pady = 5)
 btnF1.bind("<Button-1>",lambda event:value_F1())
 root.bind("<'>", lambda event: value_F1())
 
+# ==========detect keyboard input
+def root_exit():
+    root.quit()
 
+timer=threading.Timer(3,root_exit)
+
+def detectInput():
+    global timer
+    timer.cancel()
+    timer = threading.Timer(3,root_exit)
+    timer.start()
+
+
+root.bind("<KeyRelease>", lambda event:detectInput())
 
 #========= main loop
 
