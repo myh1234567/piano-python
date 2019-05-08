@@ -32,7 +32,6 @@ pg.mixer.init(freq, bitsize, channels, buffer)
 # optional volume 0 to 1.0
 pg.mixer.music.set_volume(0.8)
 
-
 try:
   play_music(sys.argv[1])
 except KeyboardInterrupt:
