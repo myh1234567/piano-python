@@ -332,8 +332,8 @@ root.bind("<'>", lambda event: value_F1())
 
 # ==========detect keyboard input
 def root_exit():
-    os.system("python3 /Users/yuhaomao/Desktop/magenta/magenta/models/melody_rnn/melody_rnn_generate.py --config=lookback_rnn --bundle_file=/Users/yuhaomao/Downloads/lookback_rnn.mag --output_dir=/tmp/melody_rnn/generated --num_outputs=30 --num_steps=128 --primer_melody=\"%s\"" % str(pitch_list))
-
+    # os.system("python3 /Users/yuhaomao/Desktop/magenta/magenta/models/melody_rnn/melody_rnn_generate.py --config=lookback_rnn --bundle_file=/Users/yuhaomao/Downloads/lookback_rnn.mag --output_dir=/tmp/melody_rnn/generated --num_outputs=30 --num_steps=128 --primer_melody=\"%s\"" % str(pitch_list))
+    os.system("python3 /Users/yuhaomao/PycharmProjects/piano-python/play_midi.py /private/tmp/melody_rnn/generated/2019-05-07_143707_15.mid")
 timer=threading.Timer(3,root_exit)
 
 def detectInput():
