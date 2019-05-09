@@ -5,6 +5,8 @@ import pygame
 import tkinter as Tk
 import threading
 import os
+import psutil
+from kill import kill
 # pygame.init()
 pygame.mixer.init(44100, -16,2,2048)
 
@@ -332,9 +334,16 @@ root.bind("<'>", lambda event: value_F1())
 
 # ==========detect keyboard input
 def root_exit():
-    # os.system("python3 /Users/yuhaomao/Desktop/magenta/magenta/models/melody_rnn/melody_rnn_generate.py --config=lookback_rnn --bundle_file=/Users/yuhaomao/Downloads/lookback_rnn.mag --output_dir=/tmp/melody_rnn/generated --num_outputs=30 --num_steps=128 --primer_melody=\"%s\"" % str(pitch_list))
-    os.system("python3 /Users/yuhaomao/PycharmProjects/piano-python/play_midi.py /private/tmp/melody_rnn/generated/2019-05-07_143707_15.mid")
+    # global pids_begin
+    # pids_begin = psutil.pids()
+    # print("111")
+    # print(pids_begin)
+    os.system("python3 /Users/yuhaomao/Desktop/magenta/magenta/models/melody_rnn/melody_rnn_generate.py --config=lookback_rnn --bundle_file=/Users/yuhaomao/Downloads/lookback_rnn.mag --output_dir=/tmp/melody_rnn/generated --num_outputs=30 --num_steps=128 --primer_melody=\"%s\"" % str(pitch_list))
+    # os.system("python3 /Users/yuhaomao/PycharmProjects/piano-python/play_midi.py /private/tmp/melody_rnn/generated/2019-05-07_143707_30.mid")
+    pygame.mixer.music.load("/private/tmp/melody_rnn/generated/2019-05-07_143707_30.mid")
+    pygame.mixer.music.play()
 timer=threading.Timer(3,root_exit)
+
 
 def detectInput():
     global timer
@@ -342,9 +351,21 @@ def detectInput():
     timer = threading.Timer(3,root_exit)
     timer.start()
 
+def stop_music():
+    pygame.mixer.music.stop()
+    # pids_stop = psutil.pids()
+    # print("222")
+    # print(pids_stop)
+    # kill(pids_stop[-1])
+    # for pid in pids_stop:
+    #     # if pid not in pids_begin:
+    #     p = psutil.Process(pid)
+    #     print("pid-%d,pname-%s" % (pid, p.name()))
+    #         # kill(pid)
+    #         pass
 
 root.bind("<KeyRelease>", lambda event:detectInput())
-
+root.bind("<Button-1>", lambda event:stop_music())
 #========= main loop
 
 root.mainloop()
