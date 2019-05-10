@@ -338,6 +338,7 @@ def root_exit():
     # pids_begin = psutil.pids()
     # print("111")
     # print(pids_begin)
+    print("111")
     os.system("python3 /Users/yuhaomao/Desktop/magenta/magenta/models/melody_rnn/melody_rnn_generate.py --config=lookback_rnn --bundle_file=/Users/yuhaomao/Downloads/lookback_rnn.mag --output_dir=/tmp/melody_rnn/generated --num_outputs=30 --num_steps=128 --primer_melody=\"%s\"" % str(pitch_list))
     # os.system("python3 /Users/yuhaomao/PycharmProjects/piano-python/play_midi.py /private/tmp/melody_rnn/generated/2019-05-07_143707_30.mid")
     pygame.mixer.music.load("/private/tmp/melody_rnn/generated/2019-05-07_143707_30.mid")
@@ -363,6 +364,7 @@ def stop_music():
     #     print("pid-%d,pname-%s" % (pid, p.name()))
     #         # kill(pid)
     #         pass
+
 
 root.bind("<KeyRelease>", lambda event:detectInput())
 root.bind("<Button-1>", lambda event:stop_music())
