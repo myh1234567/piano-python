@@ -246,6 +246,6 @@ tf.app.flags.DEFINE_string(
 #     run_with_flags(generator)
 
 
-if __name__=="__main__":
-    # tf.app.run(main)
-    tf.app.run(melody_rnn_generate.main)
+# if __name__=="__main__":
+#     # tf.app.run(main)
+tf.app.run(melody_rnn_generate.main)

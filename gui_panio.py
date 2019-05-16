@@ -7,6 +7,9 @@ import threading
 import os
 import psutil
 from kill import kill
+from magenta.models.melody_rnn import melody_rnn_generate
+import tensorflow as tf
+
 # pygame.init()
 pygame.mixer.init(44100, -16,2,2048)
 
@@ -332,25 +335,119 @@ btnF1.grid(row = 1, column = 10, padx = 5, pady = 5)
 btnF1.bind("<Button-1>",lambda event:value_F1())
 root.bind("<'>", lambda event: value_F1())
 
+
+def call_melody_rnn():
+    flist = tf.app.flags.FLAGS._flags()
+    klist = []
+
+    for i in flist:
+        klist.append(i)
+
+    for k in klist:
+        tf.app.flags.FLAGS.__delattr__(k)
+
+    FLAGS = tf.app.flags.FLAGS
+
+    tf.app.flags.DEFINE_string(
+        'run_dir', None,
+        'Path to the directory where the latest checkpoint will be loaded from.')
+    tf.app.flags.DEFINE_string(
+        'checkpoint_file', None,
+        'Path to the checkpoint file. run_dir will take priority over this flag.')
+    tf.app.flags.DEFINE_string(
+        'bundle_file', "/Users/yuhaomao/Downloads/lookback_rnn.mag",
+        'Path to the bundle file. If specified, this will take priority over '
+        'run_dir and checkpoint_file, unless save_generator_bundle is True, in '
+        'which case both this flag and either run_dir or checkpoint_file are '
+        'required')
+    tf.app.flags.DEFINE_boolean(
+        'save_generator_bundle', False,
+        'If true, instead of generating a sequence, will save this generator as a '
+        'bundle file in the location specified by the bundle_file flag')
+    tf.app.flags.DEFINE_string(
+        'bundle_description', None,
+        'A short, human-readable text description of the bundle (e.g., training '
+        'data, hyper parameters, etc.).')
+    tf.app.flags.DEFINE_string(
+        'output_dir', '/tmp/melody_rnn/generated',
+        'The directory where MIDI files will be saved to.')
+    tf.app.flags.DEFINE_integer(
+        'num_outputs', 10,
+        'The number of melodies to generate. One MIDI file will be created for '
+        'each.')
+    tf.app.flags.DEFINE_integer(
+        'num_steps', 128,
+        'The total number of steps the generated melodies should be, priming '
+        'melody length + generated steps. Each step is a 16th of a bar.')
+    tf.app.flags.DEFINE_string(
+        'primer_melody', "[60,-2,60,-2,67,-2,67,-2]",
+        'A string representation of a Python list of '
+        'magenta.music.Melody event values. For example: '
+        '"[60, -2, 60, -2, 67, -2, 67, -2]". If specified, this melody will be '
+        'used as the priming melody. If a priming melody is not specified, '
+        'melodies will be generated from scratch.')
+    tf.app.flags.DEFINE_string(
+        'primer_midi', '',
+        'The path to a MIDI file containing a melody that will be used as a '
+        'priming melody. If a primer melody is not specified, melodies will be '
+        'generated from scratch.')
+    tf.app.flags.DEFINE_float(
+        'qpm', None,
+        'The quarters per minute to play generated output at. If a primer MIDI is '
+        'given, the qpm from that will override this flag. If qpm is None, qpm '
+        'will default to 120.')
+    tf.app.flags.DEFINE_float(
+        'temperature', 1.0,
+        'The randomness of the generated melodies. 1.0 uses the unaltered softmax '
+        'probabilities, greater than 1.0 makes melodies more random, less than 1.0 '
+        'makes melodies less random.')
+    tf.app.flags.DEFINE_integer(
+        'beam_size', 1,
+        'The beam size to use for beam search when generating melodies.')
+    tf.app.flags.DEFINE_integer(
+        'branch_factor', 1,
+        'The branch factor to use for beam search when generating melodies.')
+    tf.app.flags.DEFINE_integer(
+        'steps_per_iteration', 1,
+        'The number of melody steps to take per beam search iteration.')
+    tf.app.flags.DEFINE_string(
+        'log', 'INFO',
+        'The threshold for what messages will be logged DEBUG, INFO, WARN, ERROR, '
+        'or FATAL.')
+
+    tf.app.flags.DEFINE_string(
+        'hparams', "", 'Hyperparameter overrides, '
+                       'represented as a string containing comma-separated '
+                       'hparam_name=value pairs.')
+
+    melody_rnn_generate.main("/Users/yuhaomao/Desktop/magenta/magenta/models/melody_rnn/melody_rnn_generate.py")
+
+
 # ==========detect keyboard input
 def root_exit():
     # global pids_begin
     # pids_begin = psutil.pids()
     # print("111")
     # print(pids_begin)
-    print("111")
-    os.system("python3 /Users/yuhaomao/Desktop/magenta/magenta/models/melody_rnn/melody_rnn_generate.py --config=lookback_rnn --bundle_file=/Users/yuhaomao/Downloads/lookback_rnn.mag --output_dir=/tmp/melody_rnn/generated --num_outputs=30 --num_steps=128 --primer_melody=\"%s\"" % str(pitch_list))
+    # os.system("python3 /Users/yuhaomao/Desktop/magenta/magenta/models/melody_rnn/melody_rnn_generate.py --config=lookback_rnn --bundle_file=/Users/yuhaomao/Downloads/lookback_rnn.mag --output_dir=/tmp/melody_rnn/generated --num_outputs=3 --num_steps=128 --primer_melody=\"%s\"" % str(pitch_list))
+    call_melody_rnn()
     # os.system("python3 /Users/yuhaomao/PycharmProjects/piano-python/play_midi.py /private/tmp/melody_rnn/generated/2019-05-07_143707_30.mid")
-    pygame.mixer.music.load("/private/tmp/melody_rnn/generated/2019-05-07_143707_30.mid")
+    pygame.mixer.music.load("/Users/yuhaomao/Downloads/twinkle_twinkle.mid")
     pygame.mixer.music.play()
-timer=threading.Timer(3,root_exit)
+# timer=threading.Timer(3,root_exit)
 
 
 def detectInput():
-    global timer
-    timer.cancel()
-    timer = threading.Timer(3,root_exit)
-    timer.start()
+    # global timer
+    # timer.cancel()
+    # timer = threading.Timer(3,root_exit)
+    # timer.start()
+    # os.system("python3 /Users/yuhaomao/Desktop/magenta/magenta/models/melody_rnn/melody_rnn_generate.py --config=lookback_rnn --bundle_file=/Users/yuhaomao/Downloads/lookback_rnn.mag --output_dir=/tmp/melody_rnn/generated --num_outputs=3 --num_steps=128 --primer_melody=\"%s\"" % str(pitch_list))
+
+    call_melody_rnn()
+    pygame.mixer.music.load("/Users/yuhaomao/Downloads/twinkle_twinkle.mid")
+    pygame.mixer.music.play()
+
 
 def stop_music():
     pygame.mixer.music.stop()
@@ -366,8 +463,11 @@ def stop_music():
     #         pass
 
 
-root.bind("<KeyRelease>", lambda event:detectInput())
-root.bind("<Button-1>", lambda event:stop_music())
+root.bind("<space>", lambda event:detectInput())
+root.bind("<Return>", lambda event:stop_music())
+
+# root.bind("<KeyRelease>", lambda event:detectInput())
+# root.bind("<Button-1>", lambda event:stop_music())
 #========= main loop
 
 root.mainloop()
