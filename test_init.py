@@ -10,90 +10,90 @@ from magenta.protobuf import generator_pb2
 from magenta.protobuf import music_pb2
 from magenta.models.melody_rnn import melody_rnn_generate
 
-import tensorflow as tf
-
-flist  = tf.app.flags.FLAGS._flags()
-klist = []
-
-for k in flist:
-    klist.append(k)
-
-for k in klist:
-    tf.app.flags.FLAGS.__delattr__(k)
-
-FLAGS = tf.app.flags.FLAGS
-
-tf.app.flags.DEFINE_string(
-    'run_dir', None,
-    'Path to the directory where the latest checkpoint will be loaded from.')
-tf.app.flags.DEFINE_string(
-    'checkpoint_file', None,
-    'Path to the checkpoint file. run_dir will take priority over this flag.')
-tf.app.flags.DEFINE_string(
-    'bundle_file', "/Users/yuhaomao/Downloads/lookback_rnn.mag",
-    'Path to the bundle file. If specified, this will take priority over '
-    'run_dir and checkpoint_file, unless save_generator_bundle is True, in '
-    'which case both this flag and either run_dir or checkpoint_file are '
-    'required')
-tf.app.flags.DEFINE_boolean(
-    'save_generator_bundle', False,
-    'If true, instead of generating a sequence, will save this generator as a '
-    'bundle file in the location specified by the bundle_file flag')
-tf.app.flags.DEFINE_string(
-    'bundle_description', None,
-    'A short, human-readable text description of the bundle (e.g., training '
-    'data, hyper parameters, etc.).')
-tf.app.flags.DEFINE_string(
-    'output_dir', '/tmp/melody_rnn/generated',
-    'The directory where MIDI files will be saved to.')
-tf.app.flags.DEFINE_integer(
-    'num_outputs', 10,
-    'The number of melodies to generate. One MIDI file will be created for '
-    'each.')
-tf.app.flags.DEFINE_integer(
-    'num_steps', 128,
-    'The total number of steps the generated melodies should be, priming '
-    'melody length + generated steps. Each step is a 16th of a bar.')
-tf.app.flags.DEFINE_string(
-    'primer_melody', "[60,-2,60,-2,67,-2,67,-2]",
-    'A string representation of a Python list of '
-    'magenta.music.Melody event values. For example: '
-    '"[60, -2, 60, -2, 67, -2, 67, -2]". If specified, this melody will be '
-    'used as the priming melody. If a priming melody is not specified, '
-    'melodies will be generated from scratch.')
-tf.app.flags.DEFINE_string(
-    'primer_midi', '',
-    'The path to a MIDI file containing a melody that will be used as a '
-    'priming melody. If a primer melody is not specified, melodies will be '
-    'generated from scratch.')
-tf.app.flags.DEFINE_float(
-    'qpm', None,
-    'The quarters per minute to play generated output at. If a primer MIDI is '
-    'given, the qpm from that will override this flag. If qpm is None, qpm '
-    'will default to 120.')
-tf.app.flags.DEFINE_float(
-    'temperature', 1.0,
-    'The randomness of the generated melodies. 1.0 uses the unaltered softmax '
-    'probabilities, greater than 1.0 makes melodies more random, less than 1.0 '
-    'makes melodies less random.')
-tf.app.flags.DEFINE_integer(
-    'beam_size', 1,
-    'The beam size to use for beam search when generating melodies.')
-tf.app.flags.DEFINE_integer(
-    'branch_factor', 1,
-    'The branch factor to use for beam search when generating melodies.')
-tf.app.flags.DEFINE_integer(
-    'steps_per_iteration', 1,
-    'The number of melody steps to take per beam search iteration.')
-tf.app.flags.DEFINE_string(
-    'log', 'INFO',
-    'The threshold for what messages will be logged DEBUG, INFO, WARN, ERROR, '
-    'or FATAL.')
-
-tf.app.flags.DEFINE_string(
-    'hparams', "", 'Hyperparameter overrides, '
-    'represented as a string containing comma-separated '
-    'hparam_name=value pairs.')
+# import tensorflow as tf
+#
+# flist  = tf.app.flags.FLAGS._flags()
+# klist = []
+#
+# for k in flist:
+#     klist.append(k)
+#
+# for k in klist:
+#     tf.app.flags.FLAGS.__delattr__(k)
+#
+# FLAGS = tf.app.flags.FLAGS
+#
+# tf.app.flags.DEFINE_string(
+#     'run_dir', None,
+#     'Path to the directory where the latest checkpoint will be loaded from.')
+# tf.app.flags.DEFINE_string(
+#     'checkpoint_file', None,
+#     'Path to the checkpoint file. run_dir will take priority over this flag.')
+# tf.app.flags.DEFINE_string(
+#     'bundle_file', "/Users/yuhaomao/Downloads/lookback_rnn.mag",
+#     'Path to the bundle file. If specified, this will take priority over '
+#     'run_dir and checkpoint_file, unless save_generator_bundle is True, in '
+#     'which case both this flag and either run_dir or checkpoint_file are '
+#     'required')
+# tf.app.flags.DEFINE_boolean(
+#     'save_generator_bundle', False,
+#     'If true, instead of generating a sequence, will save this generator as a '
+#     'bundle file in the location specified by the bundle_file flag')
+# tf.app.flags.DEFINE_string(
+#     'bundle_description', None,
+#     'A short, human-readable text description of the bundle (e.g., training '
+#     'data, hyper parameters, etc.).')
+# tf.app.flags.DEFINE_string(
+#     'output_dir', '/tmp/melody_rnn/generated',
+#     'The directory where MIDI files will be saved to.')
+# tf.app.flags.DEFINE_integer(
+#     'num_outputs', 10,
+#     'The number of melodies to generate. One MIDI file will be created for '
+#     'each.')
+# tf.app.flags.DEFINE_integer(
+#     'num_steps', 128,
+#     'The total number of steps the generated melodies should be, priming '
+#     'melody length + generated steps. Each step is a 16th of a bar.')
+# tf.app.flags.DEFINE_string(
+#     'primer_melody', "[60,-2,60,-2,67,-2,67,-2]",
+#     'A string representation of a Python list of '
+#     'magenta.music.Melody event values. For example: '
+#     '"[60, -2, 60, -2, 67, -2, 67, -2]". If specified, this melody will be '
+#     'used as the priming melody. If a priming melody is not specified, '
+#     'melodies will be generated from scratch.')
+# tf.app.flags.DEFINE_string(
+#     'primer_midi', '',
+#     'The path to a MIDI file containing a melody that will be used as a '
+#     'priming melody. If a primer melody is not specified, melodies will be '
+#     'generated from scratch.')
+# tf.app.flags.DEFINE_float(
+#     'qpm', None,
+#     'The quarters per minute to play generated output at. If a primer MIDI is '
+#     'given, the qpm from that will override this flag. If qpm is None, qpm '
+#     'will default to 120.')
+# tf.app.flags.DEFINE_float(
+#     'temperature', 1.0,
+#     'The randomness of the generated melodies. 1.0 uses the unaltered softmax '
+#     'probabilities, greater than 1.0 makes melodies more random, less than 1.0 '
+#     'makes melodies less random.')
+# tf.app.flags.DEFINE_integer(
+#     'beam_size', 1,
+#     'The beam size to use for beam search when generating melodies.')
+# tf.app.flags.DEFINE_integer(
+#     'branch_factor', 1,
+#     'The branch factor to use for beam search when generating melodies.')
+# tf.app.flags.DEFINE_integer(
+#     'steps_per_iteration', 1,
+#     'The number of melody steps to take per beam search iteration.')
+# tf.app.flags.DEFINE_string(
+#     'log', 'INFO',
+#     'The threshold for what messages will be logged DEBUG, INFO, WARN, ERROR, '
+#     'or FATAL.')
+#
+# tf.app.flags.DEFINE_string(
+#     'hparams', "", 'Hyperparameter overrides, '
+#     'represented as a string containing comma-separated '
+#     'hparam_name=value pairs.')
 
 
 # def get_checkpoint():
@@ -248,4 +248,148 @@ tf.app.flags.DEFINE_string(
 
 # if __name__=="__main__":
 #     # tf.app.run(main)
-tf.app.run(melody_rnn_generate.main)
+# tf.app.run(melody_rnn_generate.main)
+
+import ast
+import os
+import time
+
+import magenta
+from magenta.models.melody_rnn import melody_rnn_config_flags
+from magenta.models.melody_rnn import melody_rnn_model
+from magenta.models.melody_rnn import melody_rnn_sequence_generator
+from magenta.protobuf import generator_pb2
+from magenta.protobuf import music_pb2
+import tensorflow as tf
+
+
+flist  = tf.app.flags.FLAGS._flags()
+klist = []
+
+for k in flist:
+    klist.append(k)
+
+for k in klist:
+    tf.app.flags.FLAGS.__delattr__(k)
+
+FLAGS = tf.app.flags.FLAGS
+
+tf.app.flags.DEFINE_string(
+    'run_dir', None,
+    'Path to the directory where the latest checkpoint will be loaded from.')
+tf.app.flags.DEFINE_string(
+    'checkpoint_file', None,
+    'Path to the checkpoint file. run_dir will take priority over this flag.')
+tf.app.flags.DEFINE_string(
+    'bundle_file', "/Users/yuhaomao/Downloads/lookback_rnn.mag",
+    'Path to the bundle file. If specified, this will take priority over '
+    'run_dir and checkpoint_file, unless save_generator_bundle is True, in '
+    'which case both this flag and either run_dir or checkpoint_file are '
+    'required')
+tf.app.flags.DEFINE_boolean(
+    'save_generator_bundle', False,
+    'If true, instead of generating a sequence, will save this generator as a '
+    'bundle file in the location specified by the bundle_file flag')
+tf.app.flags.DEFINE_string(
+    'bundle_description', None,
+    'A short, human-readable text description of the bundle (e.g., training '
+    'data, hyper parameters, etc.).')
+tf.app.flags.DEFINE_string(
+    'output_dir', '/tmp/melody_rnn/generated',
+    'The directory where MIDI files will be saved to.')
+tf.app.flags.DEFINE_integer(
+    'num_outputs', 10,
+    'The number of melodies to generate. One MIDI file will be created for '
+    'each.')
+tf.app.flags.DEFINE_integer(
+    'num_steps', 128,
+    'The total number of steps the generated melodies should be, priming '
+    'melody length + generated steps. Each step is a 16th of a bar.')
+tf.app.flags.DEFINE_string(
+    'primer_melody', "[60,-2,60,-2,67,-2,67,-2]",
+    'A string representation of a Python list of '
+    'magenta.music.Melody event values. For example: '
+    '"[60, -2, 60, -2, 67, -2, 67, -2]". If specified, this melody will be '
+    'used as the priming melody. If a priming melody is not specified, '
+    'melodies will be generated from scratch.')
+tf.app.flags.DEFINE_string(
+    'primer_midi', '',
+    'The path to a MIDI file containing a melody that will be used as a '
+    'priming melody. If a primer melody is not specified, melodies will be '
+    'generated from scratch.')
+tf.app.flags.DEFINE_float(
+    'qpm', None,
+    'The quarters per minute to play generated output at. If a primer MIDI is '
+    'given, the qpm from that will override this flag. If qpm is None, qpm '
+    'will default to 120.')
+tf.app.flags.DEFINE_float(
+    'temperature', 1.0,
+    'The randomness of the generated melodies. 1.0 uses the unaltered softmax '
+    'probabilities, greater than 1.0 makes melodies more random, less than 1.0 '
+    'makes melodies less random.')
+tf.app.flags.DEFINE_integer(
+    'beam_size', 1,
+    'The beam size to use for beam search when generating melodies.')
+tf.app.flags.DEFINE_integer(
+    'branch_factor', 1,
+    'The branch factor to use for beam search when generating melodies.')
+tf.app.flags.DEFINE_integer(
+    'steps_per_iteration', 1,
+    'The number of melody steps to take per beam search iteration.')
+tf.app.flags.DEFINE_string(
+    'log', 'INFO',
+    'The threshold for what messages will be logged DEBUG, INFO, WARN, ERROR, '
+    'or FATAL.')
+
+tf.app.flags.DEFINE_string(
+    'hparams', "", 'Hyperparameter overrides, '
+    'represented as a string containing comma-separated '
+    'hparam_name=value pairs.')
+
+
+def get_bundle():
+  """Returns a generator_pb2.GeneratorBundle object based read from bundle_file.
+
+  Returns:
+    Either a generator_pb2.GeneratorBundle or None if the bundle_file flag is
+    not set or the save_generator_bundle flag is set.
+  """
+  if FLAGS.save_generator_bundle:
+    return None
+  if FLAGS.bundle_file is None:
+    return None
+  bundle_file = os.path.expanduser(FLAGS.bundle_file)
+  return magenta.music.read_bundle_file(bundle_file)
+
+def get_checkpoint():
+  """Get the training dir or checkpoint path to be used by the model."""
+  if ((FLAGS.run_dir or FLAGS.checkpoint_file) and
+      FLAGS.bundle_file and not FLAGS.save_generator_bundle):
+    raise magenta.music.SequenceGeneratorError(
+        'Cannot specify both bundle_file and run_dir or checkpoint_file')
+  if FLAGS.run_dir:
+    train_dir = os.path.join(os.path.expanduser(FLAGS.run_dir), 'train')
+    return train_dir
+  elif FLAGS.checkpoint_file:
+    return os.path.expanduser(FLAGS.checkpoint_file)
+  else:
+    return None
+
+
+tf.logging.set_verbosity(FLAGS.log)
+bundle = get_bundle()
+if bundle:
+    config_id = bundle.generator_details.id
+    config = melody_rnn_model.default_configs[config_id]
+    config.hparams.parse(FLAGS.hparams)
+
+generator = melody_rnn_sequence_generator.MelodyRnnSequenceGenerator(
+      model=melody_rnn_model.MelodyRnnModel(config),
+      details=config.details,
+      steps_per_quarter=config.steps_per_quarter,
+      checkpoint=get_checkpoint(),
+      bundle=bundle)
+
+print("11111")
+print(generator)
+print(type(generator))
