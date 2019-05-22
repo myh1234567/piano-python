@@ -9,6 +9,11 @@ import psutil
 from kill import kill
 from magenta.models.melody_rnn import melody_rnn_generate
 import tensorflow as tf
+from magenta.models.melody_rnn.melody_rnn_generate import m_r_g_pitch_list
+from magenta.models.melody_rnn.melody_rnn_generate import midi_file
+from time import sleep
+
+start_stop = False # detect press return  True: generate False: stop play, stop generate
 
 # pygame.init()
 pygame.mixer.init(44100, -16,2,2048)
@@ -47,6 +52,7 @@ def setwhitekey(item):
     item.config(bg="Gainsboro", fg="black")
 
 def value_Cs():
+    global pitch_list
     str1.set("C#")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/C_s.wav")
     sound.play()
@@ -55,6 +61,7 @@ def value_Cs():
     root.after(100,setblackkey,btnCs)
 
 def value_Ds():
+    global pitch_list
     str1.set("D#")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/D_s.wav")
     sound.play()
@@ -63,6 +70,7 @@ def value_Ds():
     root.after(100, setblackkey, btnDs)
 
 def value_Fs():
+    global pitch_list
     str1.set("F#")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/F_s.wav")
     sound.play()
@@ -71,6 +79,7 @@ def value_Fs():
     root.after(100, setblackkey, btnFs)
 
 def value_Gs():
+    global pitch_list
     str1.set("G#")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/G_s.wav")
     sound.play()
@@ -79,6 +88,7 @@ def value_Gs():
     root.after(100, setblackkey, btnGs)
 
 def value_Bb():
+    global pitch_list
     str1.set("Bb")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/Bb.wav")
     sound.play()
@@ -87,6 +97,7 @@ def value_Bb():
     root.after(100, setblackkey, btnBb)
 
 def value_Cs1():
+    global pitch_list
     str1.set("C_s1")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/C_s1.wav")
     sound.play()
@@ -95,6 +106,7 @@ def value_Cs1():
     root.after(100, setblackkey, btnCs1)
 
 def value_Ds1():
+    global pitch_list
     str1.set("D_s1")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/D_s1.wav")
     sound.play()
@@ -103,6 +115,7 @@ def value_Ds1():
     root.after(100, setblackkey, btnDs1)
 
 def value_C():
+    global pitch_list
     str1.set("C")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/C.wav")
     sound.play()
@@ -111,6 +124,7 @@ def value_C():
     root.after(100, setwhitekey, btnC)
 
 def value_D():
+    global pitch_list
     str1.set("D")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/D.wav")
     sound.play()
@@ -119,6 +133,7 @@ def value_D():
     root.after(100, setwhitekey, btnD)
 
 def value_E():
+    global pitch_list
     str1.set("E")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/E.wav")
     sound.play()
@@ -127,6 +142,7 @@ def value_E():
     root.after(100, setwhitekey, btnE)
 
 def value_F():
+    global pitch_list
     str1.set("F")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/F.wav")
     sound.play()
@@ -135,15 +151,16 @@ def value_F():
     root.after(100, setwhitekey, btnF)
 
 def value_G():
+    global pitch_list
     str1.set("G")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/G.wav")
     sound.play()
     pitch_list.append(67)
     btnG.config(bg="DimGray", fg="white")
     root.after(100, setwhitekey, btnG)
-    print(pitch_list)
 
 def value_A():
+    global pitch_list
     str1.set("A")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/A.wav")
     sound.play()
@@ -152,6 +169,7 @@ def value_A():
     root.after(100, setwhitekey, btnA)
 
 def value_B():
+    global pitch_list
     str1.set("B")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/B.wav")
     sound.play()
@@ -160,6 +178,7 @@ def value_B():
     root.after(100, setwhitekey, btnB)
 
 def value_C1():
+    global pitch_list
     str1.set("C1")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/C1.wav")
     sound.play()
@@ -168,6 +187,7 @@ def value_C1():
     root.after(100, setwhitekey, btnC1)
 
 def value_D1():
+    global pitch_list
     str1.set("D1")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/D1.wav")
     sound.play()
@@ -176,6 +196,7 @@ def value_D1():
     root.after(100, setwhitekey, btnD1)
 
 def value_E1():
+    global pitch_list
     str1.set("E1")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/E1.wav")
     sound.play()
@@ -184,6 +205,7 @@ def value_E1():
     root.after(100, setwhitekey, btnE1)
 
 def value_F1():
+    global pitch_list
     str1.set("F1")
     sound = pygame.mixer.Sound("/Users/yuhaomao/Downloads/Music_Notes/F1.wav")
     sound.play()
@@ -336,7 +358,7 @@ btnF1.bind("<Button-1>",lambda event:value_F1())
 root.bind("<'>", lambda event: value_F1())
 
 
-def call_melody_rnn():
+def call_melody_rnn(primer_melody):
     flist = tf.app.flags.FLAGS._flags()
     klist = []
 
@@ -380,7 +402,7 @@ def call_melody_rnn():
         'The total number of steps the generated melodies should be, priming '
         'melody length + generated steps. Each step is a 16th of a bar.')
     tf.app.flags.DEFINE_string(
-        'primer_melody', "[60,-2,60,-2,67,-2,67,-2]",
+        'primer_melody', primer_melody,
         'A string representation of a Python list of '
         'magenta.music.Melody event values. For example: '
         '"[60, -2, 60, -2, 67, -2, 67, -2]". If specified, this melody will be '
@@ -438,18 +460,38 @@ def root_exit():
 
 
 def detectInput():
+    global start_stop
+    global pitch_list
+    start_stop = True
     # global timer
     # timer.cancel()
     # timer = threading.Timer(3,root_exit)
     # timer.start()
     # os.system("python3 /Users/yuhaomao/Desktop/magenta/magenta/models/melody_rnn/melody_rnn_generate.py --config=lookback_rnn --bundle_file=/Users/yuhaomao/Downloads/lookback_rnn.mag --output_dir=/tmp/melody_rnn/generated --num_outputs=3 --num_steps=128 --primer_melody=\"%s\"" % str(pitch_list))
-
-    call_melody_rnn()
-    pygame.mixer.music.load("/Users/yuhaomao/Downloads/twinkle_twinkle.mid")
-    pygame.mixer.music.play()
-
+    # print("123131")
+    # print(pitch_list)
+    # print(type((pitch_list)))
+    # print(type("[60,-2,60,-2,67,-2,67,-2]"))
+    pitch_list += m_r_g_pitch_list
+    call_melody_rnn(str(pitch_list[-5:]))
+    while start_stop:
+        # print("gui   gui    gui   gui")
+        # print(m_r_g_pitch_list)
+        # print("########################################")
+        # t = time.time()
+        # print("detect input__")
+        # print(int(round(t * 1000)))
+        # print("aaasdadadadsadsd")
+        # print(melody_rnn_generate.midi_file)
+        # print('/private/tmp/melody_rnn/generated/%s' % melody_rnn_generate.midi_file)
+        pygame.mixer.music.load("/private/tmp/melody_rnn/generated/%s" % melody_rnn_generate.midi_file)
+        pygame.mixer.music.play()
+        call_melody_rnn(str(pitch_list[-5:]))
+        sleep(13)
 
 def stop_music():
+    global start_stop
+    start_stop = False
     pygame.mixer.music.stop()
     # pids_stop = psutil.pids()
     # print("222")
