@@ -3,7 +3,7 @@ import time
 import datetime
 import pygame
 import tkinter as Tk
-import threading
+import threading,time,random
 import os
 import psutil
 from kill import kill
@@ -17,6 +17,9 @@ start_stop = False # detect press return  True: generate False: stop play, stop 
 
 # pygame.init()
 pygame.mixer.init(44100, -16,2,2048)
+
+count = 0
+lock = threading.Lock()
 
 pitch_list = []
 root = Tk.Tk()
@@ -458,11 +461,19 @@ def root_exit():
     pygame.mixer.music.play()
 # timer=threading.Timer(3,root_exit)
 
+def generate_play():
+    global pitch_list
+    pitch_list += m_r_g_pitch_list
+    call_melody_rnn(str(pitch_list[-5:]))
+    pygame.mixer.music.load("/private/tmp/melody_rnn/generated/%s" % melody_rnn_generate.midi_file)
+    pygame.mixer.music.play()
+    root.after(13000,generate_play)
+
 
 def detectInput():
     global start_stop
     global pitch_list
-    start_stop = True
+    # start_stop = True
     # global timer
     # timer.cancel()
     # timer = threading.Timer(3,root_exit)
@@ -474,24 +485,28 @@ def detectInput():
     # print(type("[60,-2,60,-2,67,-2,67,-2]"))
     pitch_list += m_r_g_pitch_list
     call_melody_rnn(str(pitch_list[-5:]))
-    while start_stop:
-        # print("gui   gui    gui   gui")
-        # print(m_r_g_pitch_list)
-        # print("########################################")
-        # t = time.time()
-        # print("detect input__")
-        # print(int(round(t * 1000)))
-        # print("aaasdadadadsadsd")
-        # print(melody_rnn_generate.midi_file)
-        # print('/private/tmp/melody_rnn/generated/%s' % melody_rnn_generate.midi_file)
-        pygame.mixer.music.load("/private/tmp/melody_rnn/generated/%s" % melody_rnn_generate.midi_file)
-        pygame.mixer.music.play()
-        call_melody_rnn(str(pitch_list[-5:]))
-        sleep(13)
+    pygame.mixer.music.load("/private/tmp/melody_rnn/generated/%s" % melody_rnn_generate.midi_file)
+    pygame.mixer.music.play()
+    root.after(13000,generate_play)
+    # while start_stop:
+    #     # print("gui   gui    gui   gui")
+    #     # print(m_r_g_pitch_list)
+    #     # print("########################################")
+    #     # t = time.time()
+    #     # print("detect input__")
+    #     # print(int(round(t * 1000)))
+    #     # print("aaasdadadadsadsd")
+    #     # print(melody_rnn_generate.midi_file)
+    #     # print('/private/tmp/melody_rnn/generated/%s' % melody_rnn_generate.midi_file)
+    #     pygame.mixer.music.load("/private/tmp/melody_rnn/generated/%s" % melody_rnn_generate.midi_file)
+    #     pygame.mixer.music.play()
+    #     call_melody_rnn(str(pitch_list[-5:]))
+        # root.update()
+        # sleep(13)
 
 def stop_music():
-    global start_stop
-    start_stop = False
+    # global start_stop
+    # start_stop = False
     pygame.mixer.music.stop()
     # pids_stop = psutil.pids()
     # print("222")
