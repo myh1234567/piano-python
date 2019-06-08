@@ -362,6 +362,9 @@ root.bind("<'>", lambda event: value_F1())
 
 
 def call_melody_rnn(primer_melody):
+    print("primer_melody:  ")
+    print(primer_melody)
+    print(type(primer_melody))
     flist = tf.app.flags.FLAGS._flags()
     klist = []
 
